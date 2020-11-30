@@ -19,6 +19,8 @@
   "homepage": "https://github.com/davevr/Whattheflockserver#readme",
   "dependencies": {
     "apollo-server": "^2.19.0",
-    "graphql": "^15.4.0"
+    "graphql": "^15.4.0",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.3.5"
   }
 }

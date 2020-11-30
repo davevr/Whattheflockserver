@@ -5,10 +5,27 @@ const { ApolloServer, gql } = require('apollo-server');
 // your data.
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
+const {createSql} = require('./sqldatabase');
+const WTFAPI = require('./WTFAPI');
+
+const store = createSql();
+
+store.db.sync({
+  force: false,
+});
 
 
+const wtfAPI = new WTFAPI({ store });
 
-const server = new ApolloServer({ typeDefs, resolvers });
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => ({
+    wtfAPI: wtfAPI,
+  }),
+});
+
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {

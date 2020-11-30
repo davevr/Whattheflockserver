@@ -1,28 +1,10 @@
 
 module.exports = {
     Query: {
-        levels: async (_, __, ___) =>
+        levels: async (_, __, { dataSources }) =>
             //dataSources.getTheLevels;
         {
-            const sampleLevel = [{
-            id: 1,
-                name: "test",
-                description: "test level",
-                width: 10,
-                height: 10,
-                allowedTime: 30,
-
-                },
-            {
-                id: 2,
-                name: "test two",
-                description: "cool second sheep",
-                width: 15,
-                height: 25,
-                allowedTime: 15,
-        }];
-
-            return sampleLevel;
+            return dataSources.wtfAPI.getLevels();
         }
 
     },
