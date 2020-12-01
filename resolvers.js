@@ -10,118 +10,52 @@ module.exports = {
     },
 
     Level: {
-        sheep: async (level, __, ___) => {
-            const sheep = [{
-                xLoc: 10,
-                zLoc: 20,
-            }, {
-                xLoc: 10,
-                zLoc: 20,
-            }
-            ];
-            return sheep;
+        sheep: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getSheepForLevel(level.id);
         },
 
-        exit: async (level, __, ___) => {
-            const exit = {
-                xLoc: 10,
-                zLoc: 10,
-                angle: 100,
-            };
-
-            return exit;
+        exit: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getExitForLevel(level.id);
         },
 
-        fences: async (level, __, ___) => {
-            const fences = [{
-                startX: -10,
-                startZ: -10,
-                endX: 10,
-                endZ: 10,
-            }];
 
-            return fences;
+        fences: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getFencesForLevel(level.id);
         },
 
-        electricFences: async (level, __, ___) => {
-            const eFences = [{
-                xLoc: 10,
-                zLoc: 10,
-                angle: 100,
-            }];
 
-            return eFences;
+        electricFences: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getEFenceForLevel(level.id);
         },
 
-        bushes: async (level, __, ___) => {
-            const bushes = [{
-                xLoc: 10,
-                zLoc: 10,
-                angle: 100,
-            }];
-
-            return bushes;
+        bushes: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getBushesForLevel(level.id);
         },
 
-        puddles: async (level, __, ___) => {
-            const puddles = [{
-                xLoc: 10,
-                zLoc: 10,
-                angle: 100,
-                width: 5,
-                height: 4,
-            }];
 
-            return puddles;
+        puddles: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getPuddlesForLevel(level.id);
         },
 
-        mudPuddles: async (level, __, ___) => {
-            const puddles = [{
-                xLoc: 10,
-                zLoc: 10,
-                angle: 100,
-                width: 5,
-                height: 4,
-            }];
 
-            return puddles;
+        mudPuddles: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getMudPuddlesForLevel(level.id);
         },
 
-        holes: async (level, __, ___) => {
-            const holes = [{
-                entryHole: {
-                    xLoc: 5,
-                    zLoc: 5,
-                },
-                exitHole: {
-                    xLoc: 5,
-                    zLoc: 5,
-                }
-            }];
-
-            return holes;
+        holes: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getHolesForLevel(level.id);
         },
 
-        dogs: async (level, __, ___) => {
-            const dogs = [{
-                startX: 10,
-                startZ: 10,
-                endX: -10,
-                endZ: -10,
-                speed: 5,
-            }];
 
-            return dogs;
+        dogs:async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getDogsForLevel(level.id);
         },
 
-        stars: async (level, __, ___) => {
-            const stars = [{
-                xLoc: 10,
-                zLoc: 10,
-            }];
 
-            return stars;
-        }
+        stars: async (level, __, { dataSources}) => {
+            return dataSources.wtfAPI.getStarsForLevel(level.id);
+        },
+
 
     },
 };

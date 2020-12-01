@@ -28,12 +28,28 @@ module.exports.createSql = () => {
     const SheepObj = db.define('sheepobj', {
         xLoc: Sequelize.FLOAT,
         zLoc: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
     });
 
-    const SingleObj = db.define('singleobj', {
+    const ExitObj = db.define('exitobj', {
         xLoc: Sequelize.FLOAT,
         zLoc: Sequelize.FLOAT,
         angle: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
+    });
+
+    const EFenceObj = db.define('efenceobj', {
+        xLoc: Sequelize.FLOAT,
+        zLoc: Sequelize.FLOAT,
+        angle: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
+    });
+
+    const BushObj = db.define('bushobj', {
+        xLoc: Sequelize.FLOAT,
+        zLoc: Sequelize.FLOAT,
+        angle: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
     });
 
     const FenceObj = db.define('fenceobj', {
@@ -41,6 +57,7 @@ module.exports.createSql = () => {
         startZ: Sequelize.FLOAT,
         endX: Sequelize.FLOAT,
         endZ: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
     });
 
     const PuddleObj = db.define('puddleobj', {
@@ -49,7 +66,18 @@ module.exports.createSql = () => {
         width: Sequelize.FLOAT,
         height: Sequelize.FLOAT,
         angle: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
     });
+
+    const MudPuddleObj = db.define('mudpuddleobj', {
+        xLoc: Sequelize.FLOAT,
+        zLoc: Sequelize.FLOAT,
+        width: Sequelize.FLOAT,
+        height: Sequelize.FLOAT,
+        angle: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
+    });
+
 
     const DogRun = db.define('dogrun', {
         startX: Sequelize.FLOAT,
@@ -57,6 +85,7 @@ module.exports.createSql = () => {
         endX: Sequelize.FLOAT,
         endZ: Sequelize.FLOAT,
         speed: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
     });
 
     const Hole = db.define('hole', {
@@ -68,11 +97,13 @@ module.exports.createSql = () => {
         xLoc: Sequelize.FLOAT,
         zLoc: Sequelize.FLOAT,
         bonus: Sequelize.FLOAT,
+        levelId: Sequelize.INTEGER,
     });
 
     const RabbitHole = db.define('rabbithole', {
         entryHoleId: Sequelize.INTEGER,
         exitHoleId: Sequelize.INTEGER,
+        levelId: Sequelize.INTEGER,
     });
 
     const Level = db.define('level', {
@@ -84,72 +115,23 @@ module.exports.createSql = () => {
         allowedTime: Sequelize.INTEGER,
     });
 
-    const SheepToLevelAssoc = db.define('sheepToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        sheepId: Sequelize.INTEGER,
-    });
 
-    const FenceToLevelAssoc = db.define('fenceToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        fenceId: Sequelize.INTEGER,
-    });
-
-    const EFenceToLevelAssoc = db.define('eFenceToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        eFenceId: Sequelize.INTEGER,
-    });
-
-    const BushToLevelAssoc = db.define('bushToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        bushId: Sequelize.INTEGER,
-    });
-
-    const PuddleToLevelAssoc = db.define('puddleToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        puddleId: Sequelize.INTEGER,
-    });
-
-    const MudPuddleToLevelAssoc = db.define('mudPuddleToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        mudPuddleId: Sequelize.INTEGER,
-    });
-
-    const HoleToLevelAssoc = db.define('holeToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        holeId: Sequelize.INTEGER,
-    });
-
-    const DogToLevelAssoc = db.define('dogToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        dogId: Sequelize.INTEGER,
-    });
-
-    const StarToLevelAssoc = db.define('starToLevelAssoc', {
-        levelId: Sequelize.INTEGER,
-        starId: Sequelize.INTEGER,
-    });
 
 
 
     return {
         db,
         SheepObj,
-        SingleObj,
+        ExitObj,
         FenceObj,
+        BushObj,
+        EFenceObj,
         PuddleObj,
+        MudPuddleObj,
         DogRun,
         Hole,
         Star,
         RabbitHole,
         Level,
-        SheepToLevelAssoc,
-        FenceToLevelAssoc,
-        EFenceToLevelAssoc,
-        BushToLevelAssoc,
-        PuddleToLevelAssoc,
-        MudPuddleToLevelAssoc,
-        HoleToLevelAssoc,
-        DogToLevelAssoc,
-        StarToLevelAssoc,
     };
 }
