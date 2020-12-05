@@ -9,9 +9,22 @@ module.exports = {
 
     },
 
+    Mutation:  {
+        createLevel:  async (_, { newLevelData }, { dataSources }) => {
+           // create a level
+            const newLevel = await dataSources.wtfAPI.createLevel(newLevelData);
+
+            return newLevel;
+        },
+
+    },
+
     Level: {
         sheep: async (level, __, { dataSources}) => {
-            return dataSources.wtfAPI.getSheepForLevel(level.id);
+            const id = level.id;
+
+            const theSheep = await dataSources.wtfAPI.getSheepForLevel(id);
+            return theSheep;
         },
 
         exit: async (level, __, { dataSources}) => {

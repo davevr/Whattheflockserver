@@ -33,7 +33,7 @@ class WTFAPI extends DataSource {
     }
 
     async getSheepForLevel(levelId) {
-        const objects = await this.store.SheepObj.findAll({
+        const sheep = await this.store.SheepObj.findAll({
         where: {
             levelId: levelId}
         });
@@ -120,6 +120,13 @@ class WTFAPI extends DataSource {
         });
 
         return stars;
+    }
+
+    async createLevel(newLevelData) {
+        // to do:  create the level
+        const newLevel = null;
+
+        return newLevel;
     }
 }
 

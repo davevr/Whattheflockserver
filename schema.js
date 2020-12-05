@@ -6,6 +6,29 @@ const typeDefs = gql`
         levels : [Level]
     }
     
+    type Mutation {
+        
+        createLevel (newLevelData: LevelInput) : Level
+    }
+
+    input LevelInput {
+        name: String
+        description: String
+        sheep: [SheepInput!]
+        width: Float!
+        height: Float!
+        exit: SingleInput!
+        allowedTime: Int!
+        fences: [FenceInput]
+        electricFences: [SingleInput]
+        bushes: [SingleInput]
+        puddles: [SingleInput]
+        mudPuddles: [SingleInput]
+        holes: [RabbitHoleInput]
+        dogs: [DogRunInput]
+        stars: [StarInput]
+    }
+    
     
     type Level {
         id: ID!
@@ -30,8 +53,19 @@ const typeDefs = gql`
         xLoc: Float!
         zLoc: Float!
     }
+
+    input SheepInput {
+        xLoc: Float!
+        zLoc: Float!
+    }
     
     type SingleObj {
+        xLoc: Float!
+        zLoc: Float!
+        angle: Float!
+    }
+
+    input SingleInput {
         xLoc: Float!
         zLoc: Float!
         angle: Float!
@@ -43,8 +77,23 @@ const typeDefs = gql`
         endX: Float!
         endZ: Float!
     }
+
+    input FenceInput {
+        startX: Float!
+        startZ: Float!
+        endX: Float!
+        endZ: Float!
+    }
     
     type PuddleObj {
+        xLoc: Float!
+        zLoc: Float!
+        width: Float!
+        height: Float!
+        angle: Float!
+    }
+
+    input PuddleInput {
         xLoc: Float!
         zLoc: Float!
         width: Float!
@@ -59,8 +108,21 @@ const typeDefs = gql`
         endZ: Float!
         speed: Float!
     }
+
+    input DogRunInput {
+        startX: Float!
+        startZ: Float!
+        endX: Float!
+        endZ: Float!
+        speed: Float!
+    }
     
     type Hole {
+        xLoc: Float!
+        zLoc: Float!
+    }
+
+    input HoleInput {
         xLoc: Float!
         zLoc: Float!
     }
@@ -69,8 +131,19 @@ const typeDefs = gql`
         entryHole: Hole!
         exitHole: Hole!
     }
+
+    input RabbitHoleInput {
+        entryHole: HoleInput!
+        exitHole: HoleInput!
+    }
     
     type Star {
+        xLoc: Float!
+        zLoc: Float!
+        bonus: Int!
+    }
+
+    input StarInput {
         xLoc: Float!
         zLoc: Float!
         bonus: Int!

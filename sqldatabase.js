@@ -109,7 +109,6 @@ module.exports.createSql = () => {
     const Level = db.define('level', {
         width: Sequelize.FLOAT,
         height: Sequelize.FLOAT,
-        exitID: Sequelize.INTEGER,
         name: Sequelize.STRING,
         description: Sequelize.STRING,
         allowedTime: Sequelize.INTEGER,
