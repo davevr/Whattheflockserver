@@ -88,11 +88,6 @@ module.exports.createSql = () => {
         levelId: Sequelize.INTEGER,
     });
 
-    const Hole = db.define('hole', {
-        xLoc: Sequelize.FLOAT,
-        zLoc: Sequelize.FLOAT,
-    });
-
     const Star = db.define('star', {
         xLoc: Sequelize.FLOAT,
         zLoc: Sequelize.FLOAT,
@@ -101,8 +96,10 @@ module.exports.createSql = () => {
     });
 
     const RabbitHole = db.define('rabbithole', {
-        entryHoleId: Sequelize.INTEGER,
-        exitHoleId: Sequelize.INTEGER,
+        xLocEntry: Sequelize.FLOAT,
+        zLocEntry: Sequelize.FLOAT,
+        xLocExit: Sequelize.FLOAT,
+        zLocExit: Sequelize.FLOAT,
         levelId: Sequelize.INTEGER,
     });
 
@@ -128,7 +125,6 @@ module.exports.createSql = () => {
         PuddleObj,
         MudPuddleObj,
         DogRun,
-        Hole,
         Star,
         RabbitHole,
         Level,

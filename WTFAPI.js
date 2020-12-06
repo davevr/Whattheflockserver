@@ -42,12 +42,12 @@ class WTFAPI extends DataSource {
     }
 
     async getExitForLevel(levelId) {
-        const exits = await this.store.ExitObj.findAll({
+        const exitObj = await this.store.ExitObj.findOne({
             where: {
                 levelId: levelId}
         });
 
-        return exits;
+        return exitObj;
     }
 
     async getFencesForLevel(levelId) {
@@ -101,7 +101,26 @@ class WTFAPI extends DataSource {
                 levelId: levelId}
         });
 
-        return rabbitHoles;
+        let rabbitHoleData = [];
+
+        for (let curHole of rabbitHoles) {
+            let curHoleData = curHole.dataValues;
+            let entryHole = {
+                xLoc: curHole.xLocEntry,
+                zLoc: curHole.zLocEntry,
+            };
+            let exitHole = {
+                xLoc: curHole.xLocExit,
+                zLoc: curHole.zLocExit,
+            };
+
+            curHoleData.entryHole = entryHole;
+            curHoleData.exitHole = exitHole;
+
+            rabbitHoleData.push(curHoleData);
+        }
+
+        return rabbitHoleData;
     }
 
     async getDogsForLevel(levelId) {
@@ -124,8 +143,85 @@ class WTFAPI extends DataSource {
 
     async createLevel(newLevelData) {
         // to do:  create the level
-        const newLevel = null;
+        const newLevel = await this.store.Level.create(newLevelData);
 
+        // add exit
+        newLevelData.exit.levelId = newLevel.id;
+        const newExit = this.store.ExitObj.create(newLevelData.exit);
+
+        // add sheep
+        for (let curSheep of newLevelData.sheep) {
+            curSheep.levelId = newLevel.id;
+            this.store.SheepObj.create(curSheep);
+        }
+
+        // add fences
+        if (newLevelData.fences) {
+            for (let curFence of newLevelData.fences) {
+                curFence.levelId = newLevel.id;
+                this.store.FenceObj.create(curFence);
+            }
+        }
+
+        // add electic fences
+        if (newLevelData.electricFences) {
+            for (let curFence of newLevelData.electricFences) {
+                curFence.levelId = newLevel.id;
+                this.store.EFenceObj.create(curFence);
+            }
+        }
+
+        // bushes
+        if (newLevelData.bushes) {
+            for (let curBush of newLevelData.bushes) {
+                curBush.levelId = newLevel.id;
+                this.store.BushObj.create(curBush);
+            }
+        }
+
+        // puddles
+        if (newLevelData.puddles) {
+            for (let curPuddle of newLevelData.puddles) {
+                curPuddle.levelId = newLevel.id;
+                this.store.PuddleObj.create(curPuddle);
+            }
+        }
+
+        // mud puddles
+        if (newLevelData.mudPuddles) {
+            for (let curPuddle of newLevelData.mudPuddles) {
+                curPuddle.levelId = newLevel.id;
+                this.store.MudPuddleObj.create(curPuddle);
+            }
+        }
+
+        // holes
+        if (newLevelData.holes) {
+            for (let curHole of newLevelData.holes) {
+                curHole.levelId = newLevel.id;
+                curHole.xLocEntry = curHole.entryHole.xLoc;
+                curHole.zLocEntry = curHole.entryHole.zLoc;
+                curHole.xLocExit = curHole.exitHole.xLoc;
+                curHole.zLocExit = curHole.exitHole.zLoc;
+                this.store.RabbitHole.create(curHole);
+            }
+        }
+
+        // dogs
+        if (newLevelData.dogs) {
+            for (let curDog of newLevelData.dogs) {
+                curDog.levelId = newLevel.id;
+                this.store.DogRun.create(curDog);
+            }
+        }
+
+        // stars
+        if (newLevelData.stars) {
+            for (let curStar of newLevelData.stars) {
+                curStar.levelId = newLevel.id;
+                this.store.Star.create(curStar);
+            }
+        }
         return newLevel;
     }
 }
