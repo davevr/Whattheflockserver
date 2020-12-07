@@ -147,19 +147,19 @@ class WTFAPI extends DataSource {
 
         // add exit
         newLevelData.exit.levelId = newLevel.id;
-        const newExit = this.store.ExitObj.create(newLevelData.exit);
+        const newExit = await this.store.ExitObj.create(newLevelData.exit);
 
         // add sheep
         for (let curSheep of newLevelData.sheep) {
             curSheep.levelId = newLevel.id;
-            this.store.SheepObj.create(curSheep);
+            await this.store.SheepObj.create(curSheep);
         }
 
         // add fences
         if (newLevelData.fences) {
             for (let curFence of newLevelData.fences) {
                 curFence.levelId = newLevel.id;
-                this.store.FenceObj.create(curFence);
+                await this.store.FenceObj.create(curFence);
             }
         }
 
@@ -167,7 +167,7 @@ class WTFAPI extends DataSource {
         if (newLevelData.electricFences) {
             for (let curFence of newLevelData.electricFences) {
                 curFence.levelId = newLevel.id;
-                this.store.EFenceObj.create(curFence);
+                await this.store.EFenceObj.create(curFence);
             }
         }
 
@@ -175,7 +175,7 @@ class WTFAPI extends DataSource {
         if (newLevelData.bushes) {
             for (let curBush of newLevelData.bushes) {
                 curBush.levelId = newLevel.id;
-                this.store.BushObj.create(curBush);
+                await this.store.BushObj.create(curBush);
             }
         }
 
@@ -183,7 +183,7 @@ class WTFAPI extends DataSource {
         if (newLevelData.puddles) {
             for (let curPuddle of newLevelData.puddles) {
                 curPuddle.levelId = newLevel.id;
-                this.store.PuddleObj.create(curPuddle);
+                await this.store.PuddleObj.create(curPuddle);
             }
         }
 
@@ -191,7 +191,7 @@ class WTFAPI extends DataSource {
         if (newLevelData.mudPuddles) {
             for (let curPuddle of newLevelData.mudPuddles) {
                 curPuddle.levelId = newLevel.id;
-                this.store.MudPuddleObj.create(curPuddle);
+                await this.store.MudPuddleObj.create(curPuddle);
             }
         }
 
@@ -203,7 +203,7 @@ class WTFAPI extends DataSource {
                 curHole.zLocEntry = curHole.entryHole.zLoc;
                 curHole.xLocExit = curHole.exitHole.xLoc;
                 curHole.zLocExit = curHole.exitHole.zLoc;
-                this.store.RabbitHole.create(curHole);
+                await this.store.RabbitHole.create(curHole);
             }
         }
 
@@ -211,7 +211,7 @@ class WTFAPI extends DataSource {
         if (newLevelData.dogs) {
             for (let curDog of newLevelData.dogs) {
                 curDog.levelId = newLevel.id;
-                this.store.DogRun.create(curDog);
+                await  this.store.DogRun.create(curDog);
             }
         }
 
@@ -219,7 +219,7 @@ class WTFAPI extends DataSource {
         if (newLevelData.stars) {
             for (let curStar of newLevelData.stars) {
                 curStar.levelId = newLevel.id;
-                this.store.Star.create(curStar);
+                await this.store.Star.create(curStar);
             }
         }
         return newLevel;
