@@ -1,16 +1,28 @@
 const Sequelize = require('sequelize');
 
+const {
+    MYSQL_HOST: HOST,
+    MYSQL_HOST_FILE: HOST_FILE,
+    MYSQL_USER: USER,
+    MYSQL_USER_FILE: USER_FILE,
+    MYSQL_PASSWORD: PASSWORD,
+    MYSQL_PASSWORD_FILE: PASSWORD_FILE,
+    MYSQL_DB: DB,
+    MYSQL_DB_FILE: DB_FILE,
+} = process.env;
 
 module.exports.createSql = () => {
     let options = [];
 
-    const host = '127.0.0.1'; // local machine mySQL
-    const pwd = 'password';
-    const username = 'root';
+    const host = HOST_FILE ? fs.readFileSync(HOST_FILE) : HOST;
+    const user = USER_FILE ? fs.readFileSync(USER_FILE) : USER;
+    const password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE) : PASSWORD;
+    const database = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
 
 
 
-    const db = new Sequelize('wtfdata', username, pwd, {
+
+    const db = new Sequelize(database, user, password, {
         host: host,
         dialect: 'mysql',
         dialectOptions: options,
