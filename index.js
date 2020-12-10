@@ -14,8 +14,7 @@ store.db.sync({
   force: false,
 });
 
-
-
+// a comment
 
 const wtfAPI = new WTFAPI({ store });
 
