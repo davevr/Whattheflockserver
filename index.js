@@ -15,6 +15,8 @@ store.db.sync({
 });
 
 
+
+
 const wtfAPI = new WTFAPI({ store });
 
 
