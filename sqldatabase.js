@@ -9,16 +9,39 @@ const {
     MYSQL_PASSWORD_FILE: PASSWORD_FILE,
     MYSQL_DB: DB,
     MYSQL_DB_FILE: DB_FILE,
+    IS_IN_GCLOUD: IS_IN_GCLOUD,
 } = process.env;
 
 module.exports.createSql = () => {
     let options = [];
 
-    const host = HOST_FILE ? fs.readFileSync(HOST_FILE) : HOST;
-    const user = USER_FILE ? fs.readFileSync(USER_FILE) : USER;
-    const password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE) : PASSWORD;
-    const database = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
+    let host = HOST_FILE ? fs.readFileSync(HOST_FILE) : HOST;
+    let user = USER_FILE ? fs.readFileSync(USER_FILE) : USER;
+    let password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE) : PASSWORD;
+    let database = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
+    const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql';
 
+
+    console.log('process env: ' + JSON.stringify(process.env));
+    const localDB = true; // false;  // true;
+
+    if (IS_IN_GCLOUD) {
+        host ='localhost';
+        const connectionName = process.env.CLOUD_SQL_CONNECTION_NAME || 'clouduploadtest-299219:us-central1:gamedatabase';
+        options = {
+            socketPath: `${dbSocketPath}/${connectionName}`,
+        }
+    } else if (localDB) {
+        host = '127.0.0.1'; // local machine mySQL
+        password = 'password';
+        user = 'root';
+        database = 'wtfdata';
+
+    }
+    else {
+        host =  '35.230.4.5'; // Google App Engine CloudSQL
+        pwd = 'secret';
+    }
 
 
 

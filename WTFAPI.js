@@ -29,6 +29,9 @@ class WTFAPI extends DataSource {
 
     async getLevels() {
         const levels = await this.store.Level.findAll();
+        for (const curLevel of levels) {
+            curLevel.description = "desc: " + curLevel.description;
+        }
         return levels;
     }
 
