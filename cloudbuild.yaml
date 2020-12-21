@@ -1,13 +1,13 @@
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/whattheflockserver/wtfserverimage', '.']
+    args: ['build', '-t', 'gcr.io/whattheflockserver/wtfserverimage:$COMMIT_SHA', '.']
   # Push the container image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/whattheflockserver/wtfserverimage']
+    args: ['push', 'gcr.io/whattheflockserver/wtfserverimage:$COMMIT_SHA']
   # Deploy container image to Cloud Run
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk:$COMMIT_SHA'
     entrypoint: gcloud
-    args: ['run', 'deploy', 'SERVICE-NAME', '--image', 'gcr.io/whattheflockserver/wtfserverimage', '--region', 'REGION', '--platform', 'managed']
+    args: ['run', 'deploy', 'SERVICE-NAME', '--image', 'gcr.io/whattheflockserver/wtfserverimage:$COMMIT_SHA', '--region', 'us-central1', '--platform', 'managed']
 images:
-  - gcr.io/whattheflockserver/wtfserverimage
+  - gcr.io/whattheflockserver/wtfserverimage:$COMMIT_SHA
