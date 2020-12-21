@@ -1,5 +1,13 @@
 steps:
-  # running docker-compose
-  - name: 'docker/compose:1.26.2'
-    args: ['up', '-d']
-
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/whattheflockserver/wtfserverimage', '.']
+  # Push the container image to Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/whattheflockserver/wtfserverimage']
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args: ['run', 'deploy', 'SERVICE-NAME', '--image', 'gcr.io/whattheflockserver/wtfserverimage', '--region', 'REGION', '--platform', 'managed']
+images:
+  - gcr.io/whattheflockserver/wtfserverimage
