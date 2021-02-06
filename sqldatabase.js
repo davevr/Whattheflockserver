@@ -35,6 +35,10 @@ module.exports.createSql = () => {
         }
     } else if (IS_IN_AWS) {
         // things needed for aws
+        host = HOST;
+        options = {
+            ssl: 'Amazon RDS'
+        };
     } else if (IS_IN_AZURE) {
         // things needed for azure
     } else if (localDB) {
