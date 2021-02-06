@@ -10,6 +10,8 @@ const {
     MYSQL_DB: DB,
     MYSQL_DB_FILE: DB_FILE,
     IS_IN_GCLOUD: IS_IN_GCLOUD,
+    IS_IN_AWS: IS_IN_AWS,
+    IS_IN_AZURE: IS_IN_AZURE,
 } = process.env;
 
 module.exports.createSql = () => {
@@ -31,6 +33,10 @@ module.exports.createSql = () => {
         options = {
             socketPath: `${dbSocketPath}/${connectionName}`,
         }
+    } else if (IS_IN_AWS) {
+        // things needed for aws
+    } else if (IS_IN_AZURE) {
+        // things needed for azure
     } else if (localDB) {
         host = '127.0.0.1'; // local machine mySQL
         password = 'password';
