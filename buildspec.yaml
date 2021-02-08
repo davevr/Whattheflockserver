@@ -29,23 +29,16 @@ phases:
     #commands:
       # - command
       # - command
-  #pre_build:
-    #commands:
-      # - command
-      # - command
+  pre_build:
+    commands:
+      - aws ecr get-login-password | docker login --username AWS --password-stdin 904524217010.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      # - command
-      # - command
       - docker build -t testbuild .
       - docker tag testbuild 904524217010.dkr.ecr.us-east-1.amazonaws.com/hello-repository
-      - aws ecr get-login-password | docker login --username AWS --password-stdin 904524217010.dkr.ecr.us-east-1.amazonaws.com
+  post_build:
+    commands:
       - docker push 904524217010.dkr.ecr.us-east-1.amazonaws.com/hello-repository
-      
-  #post_build:
-    #commands:
-      # - command
-      # - command
 #reports:
   #report-name-or-arn:
     #files:
