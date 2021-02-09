@@ -39,7 +39,7 @@ phases:
   post_build:
     commands:
       - docker push 904524217010.dkr.ecr.us-east-1.amazonaws.com/hello-repository
-      - printf '[{"name":"TestGameDeploy","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
+      # - printf '[{"name":"TestGameDeploy","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
 #reports:
   #report-name-or-arn:
     #files:
@@ -49,7 +49,7 @@ phases:
     #discard-paths: yes
     #file-format: JunitXml | CucumberJson
 artifacts:
-  files: imagedefinitions.json
+  # files: imagedefinitions.json
     # - location
     # - location
   #name: $(date +%Y-%m-%d)
