@@ -48,7 +48,7 @@ phases:
     #base-directory: location
     #discard-paths: yes
     #file-format: JunitXml | CucumberJson
-artifacts:
+# artifacts:
   # files: imagedefinitions.json
     # - location
     # - location
