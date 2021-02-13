@@ -21,11 +21,12 @@ module.exports.createSql = () => {
     let user = USER_FILE ? fs.readFileSync(USER_FILE) : USER;
     let password = PASSWORD_FILE ? fs.readFileSync(PASSWORD_FILE) : PASSWORD;
     let database = DB_FILE ? fs.readFileSync(DB_FILE) : DB;
+    let dialect = 'mysql';
     const dbSocketPath = process.env.DB_SOCKET_PATH || '/cloudsql';
 
 
     console.log('process env: ' + JSON.stringify(process.env));
-    const localDB = true; // false;  // true;
+    const localhost = true; // false;  // true;
 
     if (IS_IN_GCLOUD) {
         host ='localhost';
@@ -36,11 +37,23 @@ module.exports.createSql = () => {
     } else if (IS_IN_AWS) {
         // things needed for aws
         host = HOST;
+
         options = {
             ssl: 'Amazon RDS'
         };
     } else if (IS_IN_AZURE) {
         // things needed for azure
+        host = HOST;
+        dialect = 'mssql';
+        /*
+        host = 'cloudsqltestserver.database.windows.net';
+        user = 'testadmin@cloudsqltestserver';
+        password = 'AzurePassword!';
+        database = 'wtfserver';
+        */
+        options = {
+            encrypt: true
+        }
     } else if (localDB) {
         host = '127.0.0.1'; // local machine mySQL
         password = 'password';
@@ -57,7 +70,7 @@ module.exports.createSql = () => {
 
     const db = new Sequelize(database, user, password, {
         host: host,
-        dialect: 'mysql',
+        dialect: dialect,
         dialectOptions: options,
         operatorsAliases: Sequelize.Op,
         logging: false,
