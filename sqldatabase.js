@@ -29,6 +29,7 @@ module.exports.createSql = () => {
     const localhost = true; // false;  // true;
 
     if (IS_IN_GCLOUD) {
+        // here is a comment.
         host ='localhost';
         const connectionName = process.env.CLOUD_SQL_CONNECTION_NAME || 'clouduploadtest-299219:us-central1:gamedatabase';
         options = {
