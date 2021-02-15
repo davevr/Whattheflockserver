@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: davevrwhattheflockserver 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: davevrwhattheflockserver
+  template:
+    metadata:
+      labels:
+        app: davevrwhattheflockserver 
+    spec:
+      containers:
+        - name: davevrwhattheflockserver 
+          image: devopstartertest01acr.azurecr.io/davevrwhattheflockserver
+          ports:
+          - containerPort: 4000
