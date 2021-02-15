@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+// test
 const {
     MYSQL_HOST: HOST,
     MYSQL_HOST_FILE: HOST_FILE,
