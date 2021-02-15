@@ -56,17 +56,14 @@ module.exports.createSql = () => {
         options = {
             encrypt: true
         }
-    } else if (localDB) {
+    } else  {
         host = '127.0.0.1'; // local machine mySQL
         password = 'password';
         user = 'root';
         database = 'wtfdata';
 
     }
-    else {
-        host =  '35.230.4.5'; // Google App Engine CloudSQL
-        pwd = 'secret';
-    }
+   
 
 
 
