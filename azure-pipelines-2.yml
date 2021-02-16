@@ -17,11 +17,7 @@ variables:
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'devopstartertest01acr20698702-auth'
-  MYSQL_HOST: 'cloudsqltestserver.database.windows.net'
-  MYSQL_USER: 'testadmin@cloudsqltestserver'
-  MYSQL_PASSWORD: 'AzurePassword!'
-  MYSQL_DB: 'wtfserver'
-  IS_IN_AZURE: 'true'
+
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
