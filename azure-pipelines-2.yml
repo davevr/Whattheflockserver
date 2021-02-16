@@ -31,6 +31,17 @@ stages:
     displayName: Build
     pool:
       vmImage: $(vmImageName)
+    variables:
+      - name: MYSQL_HOST
+        value: 'cloudsqltestserver.database.windows.net'
+      - name: MYSQL_USER
+        value: 'testadmin@cloudsqltestserver'
+      - name: MYSQL_PASSWORD
+        value: 'AzurePassword!'
+      - name: MYSQL_DB
+        value: 'wtfserver'
+      - name: IS_IN_AZURE
+        value: 'true'
     steps:
     - task: Docker@2
       displayName: Build and push an image to container registry
