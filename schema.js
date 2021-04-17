@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server');
+const { gql } = require('apollo-server-cloud-functions-server');
 
 const typeDefs = gql`
 
