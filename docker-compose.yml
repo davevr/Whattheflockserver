@@ -1,27 +1,35 @@
 version: "3.7"
 
 services:
-  app:
-    image: node:12-alpine
-    command: sh -c "yarn install --production && node ./index.js"
+  nodejs:
+    image: davevronay/wtfserver
+    container_name: nodejs
+    restart: always
     ports:
       - 4000:4000
-    working_dir: /wtfserver
-    volumes: 
-      - ./:/wtfserver
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
-      MYSQL_PASSWORD: secret
+      MYSQL_PASSWORD: Andrea1971!
       MYSQL_DB: wtfdata
+    networks:
+      - app-network
       
   mysql:
     image: mysql:5.7
+    container_name: mysql
+    restart: always
     volumes: 
-    - todo-mysql-data:/var/lib/mysql
+      - wtf-mysql-data:/var/lib/mysql
     environment: 
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: Andrea1971!
       MYSQL_DATABASE: wtfdata
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
 
 volumes: 
-  todo-mysql-data:MYSQ
+  wtf-mysql-data:

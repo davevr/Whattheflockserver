@@ -56,9 +56,11 @@ module.exports.createSql = () => {
         options = {
             encrypt: true
         }
-    } else  {
+    } else if (host) {
+        // assume everything set from env
+    } else {
         host = '127.0.0.1'; // local machine mySQL
-        password = 'password';
+        password = 'Andrea1971!';
         user = 'root';
         database = 'wtfdata';
 

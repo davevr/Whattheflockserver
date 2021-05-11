@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server-cloud-functions');
+const { ApolloServer, gql } = require('apollo-server');
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -20,20 +20,15 @@ store.db.sync({
 const wtfAPI = new WTFAPI({ store });
 
 
-const server = new ApolloServer({
-  typeDefs,
+const server = new ApolloServer({ 
+  typeDefs, 
   resolvers,
-  playground: true,
-  introspection: true,
   dataSources: () => ({
     wtfAPI: wtfAPI,
   }),
-});
+ });
 
-
-exports.handler = server.createHandler({
-  cors: {
-    origin: true,
-    credentials: true,
-  },
+// The `listen` method launches a web server.
+server.listen().then(({ url }) => {
+  console.log(`🚀  Server ready at ${url}`);
 });
