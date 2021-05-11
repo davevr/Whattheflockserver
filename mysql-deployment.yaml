@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: D:\Dev\kubernetes\kompose.exe convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mysql
+  name: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: D:\Dev\kubernetes\kompose.exe convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app-network: "true"
+        io.kompose.service: mysql
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: wtfdata
+        - name: MYSQL_ROOT_PASSWORD
+          value: Andrea1971!
+        image: mysql:5.7
+        imagePullPolicy: ""
+        name: mysql
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: wtf-mysql-data
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+      - name: wtf-mysql-data
+        persistentVolumeClaim:
+          claimName: wtf-mysql-data
+status: {}
